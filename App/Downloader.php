@@ -172,6 +172,8 @@ class Downloader
                 $counter['failed_lesson']++;
             }
 
+            $this->sleep();
+
             Utils::write(sprintf("Current: %d of %d total. Left: %d",
                 $counter['lessons']++,
                 $new_lessons,
@@ -198,6 +200,8 @@ class Downloader
                     $counter['failed_episode'] = $counter['failed_episode'] +1;
                 }
 
+                $this->sleep();
+                
                 Utils::write(sprintf("Current: %d of %d total. Left: %d",
                     $counter['series']++,
                     $new_episodes,
@@ -205,6 +209,12 @@ class Downloader
                 ));
             }
         }
+    }
+
+    public function sleep(){
+        $sleep = rand(1, 20);
+        Utils::write(sprintf('Sleeping for %d seconds', $sleep));
+        sleep($sleep);
     }
 
     protected function _haveOptions()
